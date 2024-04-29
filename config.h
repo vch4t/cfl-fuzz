@@ -3,6 +3,7 @@
 
 #include "types.h"
 
+
 #define VERSION "v1"
 //terminal color
 #define USE_COLOR

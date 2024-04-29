@@ -5,6 +5,7 @@
 #include "types.h"
 #include "config.h"
 
+
 #ifdef USE_COLOR
 
 #  define cBLK "\x1b[0;30m"
