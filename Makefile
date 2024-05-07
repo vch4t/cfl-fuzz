@@ -45,9 +45,14 @@ afl-as: afl-as.c afl-as.h $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o test/$@ $(LDFLAGS)
 	ln -sf afl-as test/as
 
+test_gcc: afl-gcc afl-as
+
+
+test1:
+	echo $(LDFLAGS)
+
 clean:
 	rm -f $(PROGS) afl-as as afl-g++ afl-clang afl-clang++ *.o *~ a.out core core.[1-9][0-9]* *.stackdump .test
 clean_test:
 	rm -f test/$(PROGS) test/afl-as test/as test/afl-g++ test/afl-clang test/afl-clang++ test/*.o test/a.out
-test1:
-	echo $(TEST_CC)
+

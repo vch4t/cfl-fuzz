@@ -392,7 +392,7 @@ static const u8* main_payload_64 =
     "  /* tell the parent that we're OK */\n"
     "\n"
     "  movq $4, %rdx                /* len */\n"
-    "  leaq __afl_tmp(%rip),%rsi    /* data */\n"
+    "  leaq __afl_temp(%rip),%rsi    /* data */\n"
     "  movq $"STRINGIFY((FORKSRV_FD+1))",%rdi\n"
     CALL_L64("write")
     "\n"
@@ -436,7 +436,7 @@ static const u8* main_payload_64 =
     "  /* relay status to pipe, loop back */\n"
     "\n"
     "  movq $4,%rdx\n"
-    "  leaq __afl_tmp(%rip),%rsi\n"
+    "  leaq __afl_temp(%rip),%rsi\n"
     "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi\n"     
     CALL_L64("write")
     "\n"

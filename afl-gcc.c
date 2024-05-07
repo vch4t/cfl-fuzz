@@ -158,7 +158,7 @@ static void edit_params(u32 argc,char** argv){
         cc_params[cc_par_cnt++] = "-fno-builtin-strstr";
         cc_params[cc_par_cnt++] = "-fno-builtin-strcasestr";
     }
-    cc_params[cc_par_cnt]="NULL";
+    cc_params[cc_par_cnt]=NULL;
 }
 
 
