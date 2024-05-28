@@ -25,7 +25,7 @@ endif
 
 COMM_HDR    = alloc-inl.h config.h debug.h types.h
 
-all: test_x86 $(PROGS) afl-as test_build all_done
+all: test_x86 $(PROGS) afl-as afl-fuzz
 
 ifndef AFL_NO_X86
 test_x86:
@@ -44,6 +44,8 @@ afl-gcc:afl-gcc.c $(COMM_HDR) |test_x86
 afl-as: afl-as.c afl-as.h $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o test/$@ $(LDFLAGS)
 	ln -sf afl-as test/as
+afl-fuzz: afl-fuzz.c $(COMM_HDR) | test_x86
+	$(CC) $(CFLAGS) $@.c -o test/$@ $(LDFLAGS)
 
 test_gcc: afl-gcc afl-as
 

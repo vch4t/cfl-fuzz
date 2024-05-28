@@ -139,8 +139,9 @@ static void edit_params(u32 argc,char** argv){
             FATAL("ASAN and AFL_HARDEN are mutually exclusive");
         }
         cc_params[cc_par_cnt++]="-U_FORTIFY_SOURCE";
-        cc_params[cc_par_cnt++]="-fsanitize=memory";
+        cc_params[cc_par_cnt++]="-fsanitize=address";
     }
+
     if(!getenv("AFL_DONT_OPTIMIZE")){
         cc_params[cc_par_cnt++]="-g";
         cc_params[cc_par_cnt++] = "-O3";
