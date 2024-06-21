@@ -63,35 +63,16 @@ static void edit_params(u32 argc,char** argv){
     else{
         name++;
     }
-    if(!strncmp(name,"afl-clang",9)){
-        //may delete
-        clang_mode = 1;
 
-        setenv(CLANG_ENV_VAR, "1", 1);
-
-        if (!strcmp(name, "afl-clang++")) {
-        u8* alt_cxx = getenv("AFL_CXX");
-        cc_params[0] = alt_cxx ? alt_cxx : (u8*)"clang++";
-        } else {
-        u8* alt_cc = getenv("AFL_CC");
-        cc_params[0] = alt_cc ? alt_cc : (u8*)"clang";
-        }
+    if(!strcmp(name,"afl-g++")){
+        u8* alt_cxx=getenv("ALF_CXX");
+        cc_params[0]=alt_cxx ? alt_cxx : (u8*)"g++";
     }
     else{
-        if(!strcmp(name,"afl-g++")){
-            u8* alt_cxx=getenv("ALF_CXX");
-            cc_params[0]=alt_cxx ? alt_cxx : (u8*)"g++";
-        }
-        //java
-        else if(!strcmp(name,"afl-gcj")){
-            u8* alt_cc=getenv("AFL_GCJ");
-            cc_params[0]=alt_cc ? alt_cc : (u8*)"gcj";
-        }
-        else{
-            u8* alt_cc=getenv("AFL_CC");
-            cc_params[0]=alt_cc ? alt_cc : (u8*)"gcc";
-        }
+        u8* alt_cc=getenv("AFL_CC");
+        cc_params[0]=alt_cc ? alt_cc : (u8*)"gcc";
     }
+
 
     while(--argc){
         u8* cur= *(++argv);
@@ -119,9 +100,7 @@ static void edit_params(u32 argc,char** argv){
     }
     cc_params[cc_par_cnt++]="-B";
     cc_params[cc_par_cnt++]=as_path;
-    if(clang_mode){
-        cc_params[cc_par_cnt++]="-no-integrated-as";
-    }
+
     if(getenv("AFL_HARDEN")){
         cc_params[cc_par_cnt++] = "-fstack-protector-all";
         if(!fortify_set){
